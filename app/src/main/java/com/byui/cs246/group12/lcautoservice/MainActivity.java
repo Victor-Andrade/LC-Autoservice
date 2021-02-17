@@ -9,8 +9,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //New Comment / Conflict
         setContentView(R.layout.activity_main);
         //This is my change Diego Vargas.
+
 
     }
 }
