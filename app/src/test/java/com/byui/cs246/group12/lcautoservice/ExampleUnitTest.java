@@ -1,5 +1,9 @@
 package com.byui.cs246.group12.lcautoservice;
 
+import com.byui.cs246.group12.lcautoservice.model.Car;
+import com.byui.cs246.group12.lcautoservice.model.CarRepository;
+import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
+
 import org.junit.Test;
 
 import java.util.Arrays;
