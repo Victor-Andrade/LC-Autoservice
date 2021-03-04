@@ -2,6 +2,9 @@ package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarInfoActivity extends AppCompatActivity {
+    public static final String SHARED_PREF_NAME = "autoInfo";
     Spinner tradeMarkSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,23 @@ public class CarInfoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        String spinnerData = tradeMarkSpinner.getSelectedItem().toString();
+        editor.putString("tradeMarkSpinner",spinnerData);
+        editor.apply();
+    }
+
+    public void navToProc(View view) {
+
+        Intent intent = new Intent(this, QuoteActivity.class);
+        startActivity(intent);
 
     }
 }

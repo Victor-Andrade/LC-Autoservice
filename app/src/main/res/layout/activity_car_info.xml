@@ -84,17 +84,18 @@
         android:id="@+id/kilometersSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/goToQuoteButton"
+        app:layout_constraintBottom_toTopOf="@+id/lookProceduresBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kilometersTextView" />
 
     <Button
-        android:id="@+id/goToQuoteButton"
+        android:id="@+id/lookProceduresBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:onClick="navToProc"
+        android:text="Procedures"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kilometersSpinner" />
