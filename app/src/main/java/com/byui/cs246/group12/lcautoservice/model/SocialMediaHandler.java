@@ -33,14 +33,14 @@ public class SocialMediaHandler {
 
 	public static void goToInstagramProfile(Activity activity) {
 		PackageManager packageManager = activity.getPackageManager();
-		String url = "http://instagram.com/jaredrummler";
+		String url = "https://www.instagram.com/tallerluiscedeno/";
 		final Intent intent = new Intent(Intent.ACTION_VIEW);
 		try {
 			if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
 				if (url.endsWith("/")) {
 					url = url.substring(0, url.length() - 1);
 				}
-				final String username = url.substring(url.lastIndexOf("tallerluiscedeno/") + 1);
+				final String username = url.substring(url.lastIndexOf("/") + 1);
 
 				intent.setData(Uri.parse("http://instagram.com/_u/" + username));
 				intent.setPackage("com.instagram.android");
