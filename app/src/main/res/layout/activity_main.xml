@@ -117,4 +117,13 @@
         app:layout_constraintVertical_bias="0.609"
         app:srcCompat="@drawable/instagram" />
 
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="Make test"
+        app:layout_constraintBottom_toTopOf="@+id/imageStrips"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

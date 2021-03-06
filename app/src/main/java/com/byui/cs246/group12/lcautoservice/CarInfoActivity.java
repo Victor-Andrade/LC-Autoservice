@@ -11,9 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +49,6 @@ public class CarInfoActivity extends AppCompatActivity {
                 String item = parent.getItemAtPosition(position).toString();
                 Toast.makeText(CarInfoActivity.this, item, Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -65,16 +61,13 @@ public class CarInfoActivity extends AppCompatActivity {
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-
         String spinnerData = tradeMarkSpinner.getSelectedItem().toString();
         editor.putString("tradeMarkSpinner",spinnerData);
         editor.apply();
     }
 
     public void navToProc(View view) {
-
         Intent intent = new Intent(this, QuoteActivity.class);
         startActivity(intent);
-
     }
 }
