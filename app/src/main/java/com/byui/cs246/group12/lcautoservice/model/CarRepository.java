@@ -1,5 +1,6 @@
 package com.byui.cs246.group12.lcautoservice.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarRepository {
@@ -7,6 +8,14 @@ public class CarRepository {
 
     public List<String> getBrands() {
 
-        return null;
+        return new ArrayList<>();
+    }
+
+    public List<String> getModels(String brand){
+        return new ArrayList<>();
+    }
+
+    public List<String> getYears(String brand, String model){
+        return new ArrayList<>();
     }
 }
