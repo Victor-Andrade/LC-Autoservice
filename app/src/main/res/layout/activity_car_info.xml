@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".CarInfoActivity">
 
+
+
     <TextView
         android:id="@+id/tradeMarkTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/tradeMarkSpinner"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +21,11 @@
 
     <Spinner
         android:id="@+id/tradeMarkSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="22dp"
         app:layout_constraintBottom_toTopOf="@+id/modelTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tradeMarkTextView" />
 
@@ -40,11 +42,11 @@
 
     <Spinner
         android:id="@+id/modelSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="195dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@+id/yearTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.074"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modelTextView" />
 
@@ -61,11 +63,11 @@
 
     <Spinner
         android:id="@+id/yearSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="198dp"
+        android:layout_height="39dp"
         app:layout_constraintBottom_toTopOf="@+id/kilometersTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yearTextView" />
 
@@ -82,11 +84,11 @@
 
     <Spinner
         android:id="@+id/kilometersSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="194dp"
+        android:layout_height="36dp"
         app:layout_constraintBottom_toTopOf="@+id/lookProceduresBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kilometersTextView" />
 
@@ -94,8 +96,10 @@
         android:id="@+id/lookProceduresBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:onClick="navToProc"
-        android:text="Procedures"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kilometersSpinner" />
