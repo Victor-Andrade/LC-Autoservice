@@ -1,25 +1,25 @@
 package com.byui.cs246.group12.lcautoservice.model;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-
 import java.util.List;
 
 public class SocialMediaHandler {
 
-	public final void launchFacebook() {
+	public static void goToFacebookProfile(Activity activity) {
 		String yourpageid = "tallerluiscedeno";
 
-		final String urlFb = "fb://page/"+yourpageid;
+		final String urlFb = "fb://facewebmodal/f?href=https://www.facebook.com/"+yourpageid;
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(urlFb));
 
 		// If a Facebook app is installed, use it. Otherwise, launch
 		// a browser
-		final PackageManager packageManager = getPackageManager();
+		PackageManager packageManager = activity.getPackageManager();
 		@SuppressLint("QueryPermissionsNeeded") List<ResolveInfo> list =
 				packageManager.queryIntentActivities(intent,
 						PackageManager.MATCH_DEFAULT_ONLY);
@@ -28,13 +28,15 @@ public class SocialMediaHandler {
 			intent.setData(Uri.parse(urlBrowser));
 		}
 
-		startActivity(intent);
+		activity.startActivity(intent);
 	}
 
-	public static Intent newInstagramProfileIntent(PackageManager pm, String url) {
+	public static void goToInstagramProfile(Activity activity) {
+		PackageManager packageManager = activity.getPackageManager();
+		String url = "http://instagram.com/jaredrummler";
 		final Intent intent = new Intent(Intent.ACTION_VIEW);
 		try {
-			if (pm.getPackageInfo("com.instagram.android", 0) != null) {
+			if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
 				if (url.endsWith("/")) {
 					url = url.substring(0, url.length() - 1);
 				}
@@ -42,19 +44,18 @@ public class SocialMediaHandler {
 
 				intent.setData(Uri.parse("http://instagram.com/_u/" + username));
 				intent.setPackage("com.instagram.android");
-				return intent;
+				activity.startActivity(intent);
 			}
 		} catch (PackageManager.NameNotFoundException ignored) {
 		}
 		intent.setData(Uri.parse(url));
-		return intent;
+		activity.startActivity(intent);
 	}
 
-	public void goToTheWebsite() {
+	public static void goToTheWebsite(Activity activity) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW,
 				Uri.parse("https://www.tallerluiscedeno.com/"));
-		startActivity(browserIntent);
-
+		activity.startActivity(browserIntent);
 	}
 
 }
