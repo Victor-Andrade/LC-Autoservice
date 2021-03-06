@@ -6,8 +6,7 @@ import java.util.List;
 public class CarRepository {
     private ExcelManager manager;
 
-    public List<String> getBrands() {
-
+    public List<String> getBrands(){
         return new ArrayList<>();
     }
 

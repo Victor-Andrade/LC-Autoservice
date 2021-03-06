@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
 
 public class MainActivity extends AppCompatActivity {
     Button goToCarInfo;
@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CarInfoActivity.class);
             startActivity(intent);
         });
-
+        Button testButton = findViewById(R.id.testButton);
+        testButton.setOnClickListener(v -> {
+            SocialMediaHandler.goToInstagramProfile(this);
+        });
     }
 }
