@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">LC Autoservice</string>
     <string name="goToCarInfoButton">Enter Car Information</string>
+    <string name="trademark">Trademark</string>
+    <string name="model">Model</string>
+    <string name="submit">Submit</string>
+    <string name="year">Year</string>
+    <string name="kilometers">Kilometers</string>
 </resources>
