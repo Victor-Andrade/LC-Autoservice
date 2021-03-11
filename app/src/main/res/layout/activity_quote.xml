@@ -73,6 +73,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:text="Get Quote"
+        app:backgroundTint="#3F51B5"
         app:layout_constraintEnd_toStartOf="@+id/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

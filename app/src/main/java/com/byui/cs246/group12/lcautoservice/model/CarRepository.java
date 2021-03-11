@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarRepository {
+
     private ExcelManager manager;
 
     public List<String> getBrands(){
@@ -16,5 +17,13 @@ public class CarRepository {
 
     public List<String> getYears(String brand, String model){
         return new ArrayList<>();
+    }
+
+    public List<String> getKilometers(String model, String year) {
+        return new ArrayList<>();
+    }
+
+    private List<String> getProcedures(Car car) {
+        return null;
     }
 }

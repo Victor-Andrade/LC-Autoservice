@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarInfoActivity extends AppCompatActivity {
+    private static final String TAG = "CarInfoActivity";
     public static final String SHARED_PREF_NAME = "autoInfo";
     Spinner tradeMarkSpinner;
 
@@ -23,6 +25,7 @@ public class CarInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_info);
 
+        Log.v(TAG, "Loading screen");
         startSpinners();
     }
 
@@ -47,10 +50,11 @@ public class CarInfoActivity extends AppCompatActivity {
                 //Then we want to update the content for the next spinner
 
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(CarInfoActivity.this, item, Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "EU Spinner selected " + item);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
 
             }
         });
