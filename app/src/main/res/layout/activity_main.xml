@@ -11,7 +11,7 @@
         android:id="@+id/imageLogo"
         android:layout_width="355dp"
         android:layout_height="83dp"
-        android:layout_marginTop="16dp"
+        android:contentDescription="TODO"
         android:src="@drawable/logo_lc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +21,8 @@
         android:id="@+id/goToCarInfoButton"
         android:layout_width="296dp"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#FFFFFF"
         android:text="@string/goToCarInfoButton"
         android:textSize="18sp"
@@ -29,14 +31,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.915" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -46,7 +48,7 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:background="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,8 +58,8 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="15dp"
         android:background="#FFEB3B"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +71,8 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_height="15dp"
+        android:layout_marginBottom="15dp"
         android:background="#E91E63"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +86,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -100,6 +103,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toStartOf="@+id/goInstagram"
@@ -116,11 +120,19 @@
         android:layout_marginEnd="64dp"
         android:layout_marginRight="64dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.609"
         app:srcCompat="@drawable/instagram" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="208dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
