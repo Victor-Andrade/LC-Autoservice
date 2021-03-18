@@ -1,21 +1,27 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
-
 import java.io.IOException;
-
 import jxl.read.biff.BiffException;
+
+/**
+ * This class shows the first screen with the sponsor's main social media links and
+ * the button that will navigate to the selection screen.
+ */
 
 public class MainActivity extends AppCompatActivity {
     Button goToCarInfo;
+
+    /**
+     * Customer can visit the sponsor's main sites or click to enter car information button.
+     * @param savedInstanceState will save the instance of the app during load.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +33,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         ImageView goFacebook = findViewById(R.id.goFacebook);
-        goFacebook.setOnClickListener(v -> {
-            SocialMediaHandler.goToFacebookProfile(this);
-        });
+        goFacebook.setOnClickListener(v -> SocialMediaHandler.goToFacebookProfile(this));
 
         ImageView goWebsite = findViewById(R.id.goWebsite);
-        goWebsite.setOnClickListener(v -> {
-            SocialMediaHandler.goToTheWebsite(this);
-        });
+        goWebsite.setOnClickListener(v -> SocialMediaHandler.goToTheWebsite(this));
 
         ImageView goInstagram = findViewById(R.id.goInstagram);
-        goInstagram.setOnClickListener(v -> {
-            SocialMediaHandler.goToInstagramProfile(this);
-        });
+        goInstagram.setOnClickListener(v -> SocialMediaHandler.goToInstagramProfile(this));
         ExcelManager manager = new ExcelManager();
         try {
             manager.readExcelFile(this);

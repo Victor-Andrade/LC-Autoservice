@@ -8,7 +8,20 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import java.util.List;
 
+/**
+ * This class handles all the links for the sponsor's social media sites:
+ * Main website
+ * Facebook
+ * Instagram
+ */
+
 public class SocialMediaHandler {
+
+	/**
+	 * This method setup all the links for the sponsor's social media and
+	 * takes the end user to the sponsor's Facebook page.
+	 * @param activity where the intent will be called.
+	 */
 
 	public static void goToFacebookProfile(Activity activity) {
 		String yourpageid = "tallerluiscedeno";
@@ -31,6 +44,12 @@ public class SocialMediaHandler {
 		activity.startActivity(intent);
 	}
 
+	/**
+	 * This method setup all the links for the sponsor's social media and
+	 * takes the end user to the sponsor's website.
+	 * @param activity where the intent will be called.
+	 */
+
 	public static void goToInstagramProfile(Activity activity) {
 		PackageManager packageManager = activity.getPackageManager();
 		String url = "https://www.instagram.com/tallerluiscedeno/";
@@ -51,6 +70,12 @@ public class SocialMediaHandler {
 		intent.setData(Uri.parse(url));
 		activity.startActivity(intent);
 	}
+
+	/**
+	 * This method setup all the links for the sponsor's social media and
+	 * takes the end user to the sponsor's Instagram page.
+	 * @param activity where the intent will be called.
+	 */
 
 	public static void goToTheWebsite(Activity activity) {
 		Intent browserIntent = new Intent(Intent.ACTION_VIEW,
