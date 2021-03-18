@@ -1,11 +1,18 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
+
+import java.io.IOException;
+
+import jxl.read.biff.BiffException;
 
 public class MainActivity extends AppCompatActivity {
     Button goToCarInfo;
@@ -39,5 +46,13 @@ public class MainActivity extends AppCompatActivity {
         goInstagram.setOnClickListener(v -> {
             SocialMediaHandler.goToInstagramProfile(this);
         });
+        ExcelManager manager = new ExcelManager();
+        try {
+            manager.readExcelFile(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (BiffException e) {
+            e.printStackTrace();
+        }
     }
 }
