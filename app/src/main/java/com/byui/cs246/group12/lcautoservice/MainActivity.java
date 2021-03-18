@@ -1,16 +1,20 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
 
 public class MainActivity extends AppCompatActivity {
     Button goToCarInfo;
+
+    /**
+     * This class displays the customer options on the main page.
+     * Customer can visit the sponsor's main sites or click to enter car information.
+     * @param savedInstanceState will save the instance of the app in case it pauses.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

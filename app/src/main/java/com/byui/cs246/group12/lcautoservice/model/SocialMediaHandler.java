@@ -8,7 +8,19 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import java.util.List;
 
+/**
+ * This class handles all the links for the sponsor's social media sites:
+ * Main website
+ * Facebook
+ * Instagram
+ */
+
 public class SocialMediaHandler {
+
+	/**
+	 * This method setup all the links for the sponsor's social media.
+	 * @param activity will take  the end user to the sponsor's website, Facebook page or Instagram
+	 */
 
 	public static void goToFacebookProfile(Activity activity) {
 		String yourpageid = "tallerluiscedeno";

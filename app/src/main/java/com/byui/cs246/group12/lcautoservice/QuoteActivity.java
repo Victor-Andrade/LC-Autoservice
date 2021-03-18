@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class QuoteActivity extends AppCompatActivity {
+    /**
+     * This class will display the procedures based on the car selection by the end user.
+     * @param savedInstanceState will display the car information and procedures.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
