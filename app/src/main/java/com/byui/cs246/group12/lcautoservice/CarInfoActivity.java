@@ -1,7 +1,6 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

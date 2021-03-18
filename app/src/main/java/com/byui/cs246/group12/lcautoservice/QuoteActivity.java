@@ -1,15 +1,14 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
 public class QuoteActivity extends AppCompatActivity {
     /**
-     * This class will display the procedures based on the car selection by the end user.
-     * @param savedInstanceState will display the car information and procedures.
+     * This method will display the procedures based on the car selection made by the end user.
+     * @param savedInstanceState will display and save the car information and procedures.
      */
 
     @Override
