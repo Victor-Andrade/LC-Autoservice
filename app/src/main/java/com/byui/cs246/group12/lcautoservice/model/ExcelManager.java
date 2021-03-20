@@ -170,11 +170,11 @@ public class ExcelManager {
         carsData = carInfo;
     }
 }
-public class MyRunnable implements Runnable {
+public class ExelManager implements Runnable {
 
     private int var;
 
-    public MyRunnable(int var) {
+    public ExelManager(int var) {
         this.var = var;
     }
 
@@ -190,7 +190,7 @@ public class MyRunnable implements Runnable {
 
 public class ExcelManager {
     public static void main(String args[]) {
-        MyRunnable myRunnable = new MyRunnable(10);
+        ExcelManager manager = new ExcelManager(this);
         Thread t = new Thread(myRunnable)
         t.start();
     }    
