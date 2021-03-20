@@ -191,7 +191,7 @@ public class ExcelManager implements Runnable {
 public class ExcelManager {
     public static void main(String args[]) {
         ExcelManager manager = new ExcelManager(this);
-        Thread t = new Thread(myRunnable)
+        Thread t = new Thread(ExcelManager)
         t.start();
     }    
 }
