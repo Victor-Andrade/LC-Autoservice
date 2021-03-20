@@ -51,8 +51,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/save" />
 
-    <TextView
-        android:id="@+id/textView"
+    <ListView
+        android:id="@+id/list"
         android:layout_width="316dp"
         android:layout_height="170dp"
         android:layout_marginStart="16dp"
@@ -76,7 +76,7 @@
         app:backgroundTint="#3F51B5"
         app:layout_constraintEnd_toStartOf="@+id/save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/list" />
 
     <Button
         android:id="@+id/save"
