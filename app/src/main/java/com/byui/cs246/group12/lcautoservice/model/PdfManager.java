@@ -18,13 +18,13 @@ import java.io.File;
 /**
  * This class handles all the PDF related functions.
  * <ul>
- *     <li>Create PDF</li>
- *     <li>Send PDF through WhatsApp</li>
+ *     <li>Creates PDF</li>
+ *     <li>Asks permissions to find file and share it via WhatsApp</li>
  *     </ul>
  */
 
 public class PdfManager {
-	private String stringfile = Environment.getDataDirectory().getPath() + File.separator +
+	private final String stringfile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator +
 			"Test.pdf";
 
 	private ExcelManager excelManager;
