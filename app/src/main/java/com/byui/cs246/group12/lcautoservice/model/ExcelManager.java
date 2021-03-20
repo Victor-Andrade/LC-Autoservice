@@ -71,7 +71,7 @@ public class ExcelManager {
         AssetManager assetManager = context.getAssets();
         Log.v(TAG, "readExcelFile: " + Arrays.toString(assetManager.list("")));
         InputStream f = assetManager.open("DB-MAINTENANCE-PROGRAMS-TLC.CSV");
-        InputStreamReader reader = new InputStreamReader(f, StandardCharsets.UTF_8);
+        InputStreamReader reader = new InputStreamReader(f);
 //        BufferedReader brReadMe = new BufferedReader
 //                (new InputStreamReader(new FileInputStream(filReadMe), "UTF-8"));
 
@@ -97,7 +97,7 @@ public class ExcelManager {
         List<String[]> lista = new ArrayList<>();
         while(reader.ready()){
             line = bufferedReader.readLine();
-            data = line.split(";");
+            data = line.split(",");
             Log.d(TAG, Arrays.toString(data));
             lista.add(data);
         }
