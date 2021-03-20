@@ -170,11 +170,11 @@ public class ExcelManager {
         carsData = carInfo;
     }
 }
-public class ExelManager implements Runnable {
+public class ExcelManager implements Runnable {
 
     private int var;
 
-    public ExelManager(int var) {
+    public ExcelManager(int var) {
         this.var = var;
     }
 
