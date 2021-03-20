@@ -170,3 +170,28 @@ public class ExcelManager {
         carsData = carInfo;
     }
 }
+public class MyRunnable implements Runnable {
+
+    private int var;
+
+    public MyRunnable(int var) {
+        this.var = var;
+    }
+
+    public void run() {
+        public List<String> getProcedures(Car car) {
+        return carsData.get(car.getBrand())
+                .get(car.getModel())
+                .get(String.valueOf(car.getYear()))
+                .get(String.valueOf(car.getKilometers()));
+    }
+    }
+}
+
+public class ExcelManager {
+    public static void main(String args[]) {
+        MyRunnable myRunnable = new MyRunnable(10);
+        Thread t = new Thread(myRunnable)
+        t.start();
+    }    
+}
