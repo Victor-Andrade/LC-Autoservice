@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
 import java.io.IOException;
