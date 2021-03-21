@@ -10,17 +10,28 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CarInfoActivity extends AppCompatActivity {
     private static final String TAG = "CarInfoActivity";
     public static final String SHARED_PREF_NAME = "autoInfo";
     Spinner tradeMarkSpinner, modelSpinner, yearSpinner, kilometersSpinner;
+    private ExcelManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_info);
+        try {
+            manager = new ExcelManager(this);
+        } catch (IOException e) {
+            Log.e(TAG, "Error loading the files", e);
+        }
 
         Log.v(TAG, "Loading screen");
         startSpinners();
@@ -29,9 +40,7 @@ public class CarInfoActivity extends AppCompatActivity {
     private void startSpinners() {
         //Test list
         //This list will come from the Excel class
-        ArrayList<String> trademarkList = new ArrayList<>();
-        trademarkList.add("Honda");
-        trademarkList.add("Mitsubishi");
+        List<String> trademarkList = manager.getBrands();
 
         ArrayList<String> modelList = new ArrayList<>();
         modelList.add("City");

@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
 import java.io.IOException;
-import jxl.read.biff.BiffException;
 
 /**
  * This class shows the first screen with the sponsor's main social media links and
@@ -18,6 +17,7 @@ import jxl.read.biff.BiffException;
  */
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     Button goToCarInfo;
 
     /**
@@ -42,12 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView goInstagram = findViewById(R.id.goInstagram);
         goInstagram.setOnClickListener(v -> SocialMediaHandler.goToInstagramProfile(this));
-        ExcelManager manager = new ExcelManager();
         try {
-            manager.readExcelFile(this);
+            ExcelManager.startManager(this);
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BiffException e) {
             e.printStackTrace();
         }
     }

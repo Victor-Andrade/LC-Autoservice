@@ -6,4 +6,11 @@
     <string name="submit">Submit</string>
     <string name="year">Year</string>
     <string name="kilometers">Kilometers</string>
+    <string name="get_quote">Get Quote</string>
+    <string name="textview">TextView</string>
+    <string name="save">Save</string>
+    <string name="luis_cedeno_logo">luis cedeno logo</string>
+    <string name="facebook_logo">facebook_logo</string>
+    <string name="webpage_logo">webpage_logo</string>
+    <string name="instagram_logo">instagram_logo</string>
 </resources>

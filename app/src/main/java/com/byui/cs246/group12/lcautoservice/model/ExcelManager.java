@@ -3,9 +3,11 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -70,6 +72,9 @@ public class ExcelManager {
         Log.v(TAG, "readExcelFile: " + Arrays.toString(assetManager.list("")));
         InputStream f = assetManager.open("DB-MAINTENANCE-PROGRAMS-TLC.CSV");
         InputStreamReader reader = new InputStreamReader(f);
+//        BufferedReader brReadMe = new BufferedReader
+//                (new InputStreamReader(new FileInputStream(filReadMe), "UTF-8"));
+
         BufferedReader bufferedReader = new BufferedReader(reader);
         Log.v(TAG, "readExcelFile: " + bufferedReader.readLine());
         List<String> lista = new ArrayList<>();
@@ -92,7 +97,7 @@ public class ExcelManager {
         List<String[]> lista = new ArrayList<>();
         while(reader.ready()){
             line = bufferedReader.readLine();
-            data = line.split(";");
+            data = line.split(",");
             Log.d(TAG, Arrays.toString(data));
             lista.add(data);
         }
@@ -170,3 +175,28 @@ public class ExcelManager {
         carsData = carInfo;
     }
 }
+//public class ExcelManager implements Runnable {
+//
+//    private int var;
+//
+//    public ExcelManager(int var) {
+//        this.var = var;
+//    }
+//
+//    public void run() {
+//        public List<String> getProcedures(Car car) {
+//        return carsData.get(car.getBrand())
+//                .get(car.getModel())
+//                .get(String.valueOf(car.getYear()))
+//                .get(String.valueOf(car.getKilometers()));
+//    }
+//    }
+//}
+//
+//public class ExcelManager {
+//    public static void main(String args[]) {
+//        ExcelManager manager = new ExcelManager(this);
+//        Thread t = new Thread(ExcelManager)
+//        t.start();
+//    }
+//}
