@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,16 +18,20 @@ import java.util.Objects;
 /**
  * This class handle the reading of the excel files with the car info.
  */
-public class ExcelManager {
+public class ExcelManager implements Serializable {
     private static final String TAG = "ExcelManager";
-    private static HashMap<String, HashMap<String, HashMap<String, HashMap<String, List<String>>>>> carsData;
+    private HashMap<String, HashMap<String, HashMap<String, HashMap<String, List<String>>>>> carsData;
 
-    public ExcelManager(Context context) throws IOException {
-        startData(context);
+    private ExcelManager(HashMap<String, HashMap<String, HashMap<String, HashMap<String, List<String>>>>> map) throws IOException {
+        //startData(map);
+        this.carsData = map;
+//        if(carsData == null){
+//            throw new IOException("Data not found");
+//        }
     }
 
     private void startData(Context context) throws IOException {
-        if(carsData.isEmpty()){
+        if(carsData == null){
             startManager(context);
         }
     }
@@ -59,35 +64,6 @@ public class ExcelManager {
                 .get(String.valueOf(car.getKilometers()));
     }
 
-    /**
-     *
-     * @param context The context of the application.
-     * @return The list with all the data from the excel files.
-     * @throws IOException Thorows IOException it has problems reading the file.
-     */
-    public List<String> readExcelFile(Context context) throws IOException {
-        String line;
-        String[] dados;
-        AssetManager assetManager = context.getAssets();
-        Log.v(TAG, "readExcelFile: " + Arrays.toString(assetManager.list("")));
-        InputStream f = assetManager.open("DB-MAINTENANCE-PROGRAMS-TLC.CSV");
-        InputStreamReader reader = new InputStreamReader(f);
-//        BufferedReader brReadMe = new BufferedReader
-//                (new InputStreamReader(new FileInputStream(filReadMe), "UTF-8"));
-
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        Log.v(TAG, "readExcelFile: " + bufferedReader.readLine());
-        List<String> lista = new ArrayList<>();
-        while(reader.ready()){
-            line = bufferedReader.readLine();
-            dados = line.split(";");
-            Log.v(TAG, Arrays.toString(dados));
-            lista.add(dados[4]);
-        }
-        bufferedReader.close();
-        return lista;
-    }
-
     private static List<String[]> readFile(AssetManager manager, String filePath) throws IOException {
         String line;
         String[] data;
@@ -118,7 +94,7 @@ public class ExcelManager {
         return csvFiles;
     }
 
-    public static void startManager(Context context) throws IOException {
+    public static ExcelManager startManager(Context context) throws IOException {
         List<String> files = listCsv(context);
         AssetManager assetManager = context.getAssets();
         /*
@@ -134,11 +110,13 @@ public class ExcelManager {
         HashMap<String, HashMap<String, HashMap<String, List<String>>>> modelHash = new HashMap<>();
         HashMap<String, HashMap<String, HashMap<String, HashMap<String, List<String>>>>> carInfo = new HashMap<>();
         for (String file : files) {
+            Log.d(TAG, "File: "+ file);
             List<String[]> csvData = readFile(assetManager, file);
             int len = csvData.size();
             for (int i = 1; i< len; i++){
                 //First, veify if the trademark is registered.
                 String[] line = csvData.get(i);
+                Log.d(TAG, line.toString());
                 String brand = line[0];
                 String model = line[1];
                 String year = line[2];
@@ -172,31 +150,6 @@ public class ExcelManager {
                 procedures.add(procedure);
             }
         }
-        carsData = carInfo;
+        return new ExcelManager(carInfo);
     }
 }
-//public class ExcelManager implements Runnable {
-//
-//    private int var;
-//
-//    public ExcelManager(int var) {
-//        this.var = var;
-//    }
-//
-//    public void run() {
-//        public List<String> getProcedures(Car car) {
-//        return carsData.get(car.getBrand())
-//                .get(car.getModel())
-//                .get(String.valueOf(car.getYear()))
-//                .get(String.valueOf(car.getKilometers()));
-//    }
-//    }
-//}
-//
-//public class ExcelManager {
-//    public static void main(String args[]) {
-//        ExcelManager manager = new ExcelManager(this);
-//        Thread t = new Thread(ExcelManager)
-//        t.start();
-//    }
-//}

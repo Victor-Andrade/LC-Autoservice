@@ -18,29 +18,29 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    @Test
-    public void new_car() {
-        Car car = new Car("Mitsubishi","L500",2015,10);
-        assertEquals("Mitsubishi", car.getBrand());
-        assertEquals("L500", car.getModel());
-        assertEquals(2015, car.getYear());
-        assertEquals(10, car.getKilometers());
-    }
-    @Test
-    public void getProcedures(){
-        Car car = new Car("Honda", "Civic", 2010, 50);
-        ExcelManager manager = new ExcelManager();
-
-        List<String> actual = Arrays.asList("Oil change", "Tire upgrade", "Motor clean up");
-
-        assertEquals(actual, manager.getProcedures(car));
-    }
-    @Test
-    public void getBrands(){
-        CarRepository repository = new CarRepository();
-
-        List<String> actual = Arrays.asList("Honda", "Toyota", "Mitsubishi");
-
-        assertEquals(actual, repository.getBrands());
-    }
+//    @Test
+//    public void new_car() {
+//        Car car = new Car("Mitsubishi","L500",2015,10);
+//        assertEquals("Mitsubishi", car.getBrand());
+//        assertEquals("L500", car.getModel());
+//        assertEquals(2015, car.getYear());
+//        assertEquals(10, car.getKilometers());
+//    }
+//    @Test
+//    public void getProcedures(){
+//        Car car = new Car("Honda", "Civic", 2010, 50);
+//        ExcelManager manager = new ExcelManager();
+//
+//        List<String> actual = Arrays.asList("Oil change", "Tire upgrade", "Motor clean up");
+//
+//        assertEquals(actual, manager.getProcedures(car));
+//    }
+//    @Test
+//    public void getBrands(){
+//        CarRepository repository = new CarRepository();
+//
+//        List<String> actual = Arrays.asList("Honda", "Toyota", "Mitsubishi");
+//
+//        assertEquals(actual, repository.getBrands());
+//    }
 }

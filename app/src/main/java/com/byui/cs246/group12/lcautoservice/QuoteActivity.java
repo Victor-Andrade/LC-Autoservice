@@ -37,19 +37,20 @@ public class QuoteActivity extends AppCompatActivity {
     }
 
     private void manageExcel() {
-        List<String> excel = new ArrayList<>();
-        try {
-            ExcelManager manager = new ExcelManager(this);
-            excel = manager.getProcedures(car);
-        } catch (IOException e) {
-            Log.e(TAG, "Catch main", e);
-        }
-        if(!excel.isEmpty()){
-            ListView excelList = (ListView) findViewById(R.id.list);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, excel);
-            Toast.makeText(this, excel.get(2), Toast.LENGTH_SHORT).show();
-            excelList.setAdapter(adapter);
-        }
+        //Not working, needs Correction
+//        List<String> excel = new ArrayList<>();
+//        try {
+//            ExcelManager manager = new ExcelManager(this);
+//            excel = manager.getProcedures(car);
+//        } catch (IOException e) {
+//            Log.e(TAG, "Catch main", e);
+//        }
+//        if(!excel.isEmpty()){
+//            ListView excelList = (ListView) findViewById(R.id.list);
+//            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, excel);
+//            Toast.makeText(this, excel.get(2), Toast.LENGTH_SHORT).show();
+//            excelList.setAdapter(adapter);
+//        }
     }
 
     public void pdfPermissions(View view) {
@@ -61,6 +62,6 @@ public class QuoteActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         PdfManager manager = new PdfManager();
-        manager.buttonShareFile(this);
+        //manager.buttonShareFile(this);
     }
 }

@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
-
-import java.io.IOException;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +25,8 @@ public class CarInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_info);
-        try {
-            manager = new ExcelManager(this);
-        } catch (IOException e) {
-            Log.e(TAG, "Error loading the files", e);
-        }
-
+        Gson gson = new Gson();
+        manager = gson.fromJson(getIntent().getStringExtra("ExcelManager"), ExcelManager.class);
         Log.v(TAG, "Loading screen");
         startSpinners();
     }
@@ -40,24 +34,14 @@ public class CarInfoActivity extends AppCompatActivity {
     private void startSpinners() {
         //Test list
         //This list will come from the Excel class
+
         List<String> trademarkList = manager.getBrands();
 
-        ArrayList<String> modelList = new ArrayList<>();
-        modelList.add("City");
-        modelList.add("L200");
+        List<String> modelList = new ArrayList<>();
 
         ArrayList<String> yearsList = new ArrayList<>();
-        yearsList.add("2019");
-        yearsList.add("2020");
-        yearsList.add("2021");
 
         ArrayList<String> kilometersList = new ArrayList<>();
-        kilometersList.add("5");
-        kilometersList.add("10");
-        kilometersList.add("20");
-        kilometersList.add("30");
-        kilometersList.add("40");
-        kilometersList.add("50");
 
 
         //This is the 1st spinner
@@ -69,24 +53,24 @@ public class CarInfoActivity extends AppCompatActivity {
 
         //This is the 2nd spinner
         modelSpinner = findViewById(R.id.modelSpinner);
-        final ArrayAdapter[] arrayAdapter_model = new ArrayAdapter[]{new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, modelList)};
-        arrayAdapter_model[0].setDropDownViewResource(android.R.layout.simple_spinner_item);
-        modelSpinner.setAdapter(arrayAdapter_model[0]);
+        ArrayAdapter<String> modelAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, modelList);
+        modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        modelSpinner.setAdapter(modelAdapter);
 
         //This is the 3rd spinner
         yearSpinner = findViewById(R.id.yearSpinner);
-        ArrayAdapter<String> arrayAdapter_years = new ArrayAdapter<>(this,
+        ArrayAdapter<String> yearsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, yearsList);
-        arrayAdapter_years.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        yearSpinner.setAdapter(arrayAdapter_years);
+        yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        yearSpinner.setAdapter(yearsAdapter);
 
         //This is the 4th spinner
         kilometersSpinner = findViewById(R.id.kilometersSpinner);
-        ArrayAdapter<String> arrayAdapter_kilometers = new ArrayAdapter<>(this,
+        ArrayAdapter<String> kilometersAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, kilometersList);
-        arrayAdapter_kilometers.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        kilometersSpinner.setAdapter(arrayAdapter_kilometers);
+        kilometersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        kilometersSpinner.setAdapter(kilometersAdapter);
 
         tradeMarkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -95,16 +79,45 @@ public class CarInfoActivity extends AppCompatActivity {
                 // models from this brand.
                 //Then we want to update the content for the next spinner
                 String item = parent.getItemAtPosition(position).toString();
-                if(item.equals("Honda")) {
-                    arrayAdapter_model[0] =new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item,modelList);
-                }
-                modelSpinner.setAdapter(arrayAdapter_model[0]);
-
-                Log.i(TAG, "EU Spinner selected " + item);
+                modelList.clear();
+                modelList.addAll(manager.getModels(item));
+                modelAdapter.notifyDataSetChanged();
+                Log.i(TAG, "Brand Spinner selected " + item);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        modelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                yearsList.clear();
+                yearsList.addAll(manager.getYears(tradeMarkSpinner.getSelectedItem().toString(), item));
+                yearsAdapter.notifyDataSetChanged();
+                Log.i(TAG, "Model Spinner selected " + item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                kilometersList.clear();
+                List<String> receivedKilometers = manager.getKilometers(tradeMarkSpinner.getSelectedItem().toString(), modelSpinner.getSelectedItem().toString(), item);
+                kilometersList.addAll(receivedKilometers);
+                kilometersAdapter.notifyDataSetChanged();
+                Log.i(TAG, "Kilometers Spinner selected " + item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }

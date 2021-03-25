@@ -3,12 +3,14 @@ package com.byui.cs246.group12.lcautoservice;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
-
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
 /**
@@ -18,6 +20,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    ExcelManager manager;
     Button goToCarInfo;
 
     /**
@@ -30,8 +33,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button goToCarInfo = findViewById(R.id.goToCarInfoButton);
+        Gson gson = new Gson();
+        manager = gson.fromJson(getIntent().getStringExtra("ExcelManager"), ExcelManager.class);
+        if(manager == null){
+            Log.w(TAG, "Manager is null");
+        }else{
+            Log.d(TAG, "Manager received");
+        }
         goToCarInfo.setOnClickListener(v -> {
             Intent intent = new Intent(this, CarInfoActivity.class);
+            String managerJson = gson.toJson(manager);
+            intent.putExtra("ExcelManager", managerJson);
             startActivity(intent);
         });
         ImageView goFacebook = findViewById(R.id.goFacebook);
@@ -42,10 +54,5 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView goInstagram = findViewById(R.id.goInstagram);
         goInstagram.setOnClickListener(v -> SocialMediaHandler.goToInstagramProfile(this));
-        try {
-            ExcelManager.startManager(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
