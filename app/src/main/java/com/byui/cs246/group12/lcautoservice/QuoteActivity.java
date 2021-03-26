@@ -3,7 +3,9 @@ package com.byui.cs246.group12.lcautoservice;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -63,5 +65,11 @@ public class QuoteActivity extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
         PdfManager manager = new PdfManager();
         //manager.buttonShareFile(this);
+        manager.generatePdf(car,this);
+    }
+
+    public void shareFile(View view) {
+        PdfManager manager = new PdfManager();
+        manager.buttonShareFile(this);
     }
 }
