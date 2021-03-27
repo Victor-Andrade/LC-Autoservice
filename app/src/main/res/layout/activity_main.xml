@@ -84,7 +84,6 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
         android:clickable="true"
         android:contentDescription="@string/facebook_logo"
         android:focusable="true"
@@ -118,7 +117,6 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
         android:clickable="true"
         android:contentDescription="@string/instagram_logo"
         android:focusable="true"
@@ -134,5 +132,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="208dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="250dp"
+        android:layout_height="189dp"
+        android:text="@string/esta_aplicacion_es_para_obtener_una_lista_de_procedimientos_mecanicos_que_necesita_mi_automovil_de_acuerdo_con_la_marca_modelo_a_o_y_kilometraje"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/goToCarInfoButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
