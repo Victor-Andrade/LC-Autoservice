@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This class handles all the PDF related functions.
@@ -36,6 +37,7 @@ public class PdfManager {
     private final String stringfile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/Test.pdf";
     Bitmap bmp, scaledBmp;
     int pageWidth = 1240;
+    int pageHeight = 1754;
     Date dateObj;
     DateFormat dateFormat;
 
@@ -57,7 +59,7 @@ public class PdfManager {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public void generatePdf(Car car, Context context) {
+    public void generatePdf(Car car, List<String> procedures, Context context) {
         bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_lc);
         scaledBmp = Bitmap.createScaledBitmap(bmp, 400, 100, false);
         dateObj = new Date();
@@ -65,7 +67,7 @@ public class PdfManager {
         Paint myPaint = new Paint();
         Paint titlePaint = new Paint();
 
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(1240, 1754, 1).create();
+        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
         PdfDocument.Page myPage = myPdf.startPage(myPageInfo);
         Canvas canvas = myPage.getCanvas();
         canvas.drawBitmap(scaledBmp, 20, 70, myPaint);
@@ -84,6 +86,20 @@ public class PdfManager {
         canvas.drawText("Modelo: " + car.getModel(), 20, 450, myPaint);
         canvas.drawText("Año: " + car.getYear(), 20, 500, myPaint);
         canvas.drawText("Kilometros: " + car.getKilometers() + " km", 20, 550, myPaint);
+        int height = 600;
+        if(procedures.size()> 0){
+            for (String procedure : procedures) {
+                if(pageHeight - height < 50){
+                    myPdf.finishPage(myPage);
+                    myPageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
+                    myPage = myPdf.startPage(myPageInfo);
+                    canvas = myPage.getCanvas();
+                    height = 50;
+                }
+                canvas.drawText(procedure, 20,height , myPaint);
+                height +=50;
+            }
+        }
         myPdf.finishPage(myPage);
         File file = new File(stringfile);
 

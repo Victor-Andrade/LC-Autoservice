@@ -31,13 +31,13 @@ public class QuoteActivity extends AppCompatActivity {
     private Car car;
     private Gson gson;
     private ExcelManager manager;
+    List<String> excel;
 
     /**
      * This method will display the procedures based on the car selection made by the end user.
      * @param savedInstanceState will display and save the car information and procedures.
      */
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,7 @@ public class QuoteActivity extends AppCompatActivity {
     }
 
     private void manageExcel() {
-         List<String> excel = new ArrayList<>();
+         excel = new ArrayList<>();
         try {
             Log.d(TAG, car.toString());
             Log.d(TAG, manager.toString());
@@ -77,7 +77,7 @@ public class QuoteActivity extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
         PdfManager manager = new PdfManager();
         //manager.buttonShareFile(this);
-        manager.generatePdf(car,this);
+        manager.generatePdf(car,excel, this);
     }
 
     public void shareFile(View view) {
