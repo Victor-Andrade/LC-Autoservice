@@ -1,5 +1,6 @@
 package com.byui.cs246.group12.lcautoservice.model;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Environment;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.widget.Toast;
 import com.byui.cs246.group12.lcautoservice.R;
@@ -41,11 +43,14 @@ public class PdfManager {
             Toast.makeText(context, "File doesn't exist.", Toast.LENGTH_LONG).show();
             return;
         }
-        Intent intentShare = new Intent(Intent.ACTION_SEND);
-        intentShare.setType("application/pdf");
-        intentShare.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+file));
 
-        context.startActivity(Intent.createChooser(intentShare,"Share file..."));
+        Intent sendIntent = new Intent("android.intent.action.SEND");
+        Uri uri = Uri.fromFile(file);
+        sendIntent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.ContactPicker"));
+        sendIntent.setType("application/pdf");
+        sendIntent.putExtra(Intent.EXTRA_STREAM,uri);
+        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators("50684863046")+"@s.whatsapp.net");
+        context.startActivity(sendIntent);
     }
 
     public void generatePdf(Car car, Context context) {
