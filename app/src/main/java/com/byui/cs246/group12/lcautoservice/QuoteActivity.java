@@ -1,11 +1,13 @@
 package com.byui.cs246.group12.lcautoservice;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -16,43 +18,53 @@ import android.widget.Toast;
 import com.byui.cs246.group12.lcautoservice.model.Car;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.PdfManager;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class QuoteActivity extends AppCompatActivity {
     private static final String TAG = "QuoteActivity";
-    Car car;
+    private Car car;
+    private Gson gson;
+    private ExcelManager manager;
 
     /**
      * This method will display the procedures based on the car selection made by the end user.
      * @param savedInstanceState will display and save the car information and procedures.
      */
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote);
-        car = new Car("MITSUBISHI","L200",2019,300);
+        Intent receivedIntent = getIntent();
+        gson = new Gson();
+        car = gson.fromJson(receivedIntent.getStringExtra(CarInfoActivity.SHARED_PREF_NAME), Car.class);
+        manager = gson.fromJson(receivedIntent.getStringExtra("ExcelManager"), ExcelManager.class);
 
         manageExcel();
     }
 
     private void manageExcel() {
-        //Not working, needs Correction
-//        List<String> excel = new ArrayList<>();
-//        try {
-//            ExcelManager manager = new ExcelManager(this);
-//            excel = manager.getProcedures(car);
-//        } catch (IOException e) {
-//            Log.e(TAG, "Catch main", e);
-//        }
-//        if(!excel.isEmpty()){
-//            ListView excelList = (ListView) findViewById(R.id.list);
-//            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, excel);
-//            Toast.makeText(this, excel.get(2), Toast.LENGTH_SHORT).show();
-//            excelList.setAdapter(adapter);
-//        }
+         List<String> excel = new ArrayList<>();
+        try {
+            Log.d(TAG, car.toString());
+            Log.d(TAG, manager.toString());
+            excel = manager.getProcedures(car);
+        } catch (Exception e) {
+            Log.e(TAG, "Catch main", e);
+        }
+        if(!excel.isEmpty()){
+            ListView excelList = findViewById(R.id.list);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, excel);
+            Toast.makeText(this, excel.get(2), Toast.LENGTH_SHORT).show();
+            excelList.setAdapter(adapter);
+        }
     }
 
     public void pdfPermissions(View view) {

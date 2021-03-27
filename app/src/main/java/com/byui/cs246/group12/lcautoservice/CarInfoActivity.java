@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.byui.cs246.group12.lcautoservice.model.Car;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ public class CarInfoActivity extends AppCompatActivity {
     public static final String SHARED_PREF_NAME = "autoInfo";
     Spinner tradeMarkSpinner, modelSpinner, yearSpinner, kilometersSpinner;
     private ExcelManager manager;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_info);
-        Gson gson = new Gson();
+        gson = new Gson();
         manager = gson.fromJson(getIntent().getStringExtra("ExcelManager"), ExcelManager.class);
         Log.v(TAG, "Loading screen");
         startSpinners();
@@ -133,7 +136,17 @@ public class CarInfoActivity extends AppCompatActivity {
     }
 
     public void navToProc(View view) {
-        Intent intent = new Intent(this, QuoteActivity.class);
-        startActivity(intent);
+        String brand = tradeMarkSpinner.getSelectedItem().toString();
+        String model = modelSpinner.getSelectedItem().toString();
+        int year = Integer.parseInt(yearSpinner.getSelectedItem().toString());
+        int kilometers = Integer.parseInt(kilometersSpinner.getSelectedItem().toString());
+        Intent newintent = new Intent(this, QuoteActivity.class);
+        Car car = new Car(brand, model, year, kilometers);
+        String managerJson = gson.toJson(manager);
+        String carJson = gson.toJson(car);
+        Log.i(TAG, carJson);
+        newintent.putExtra("ExcelManager", managerJson);
+        newintent.putExtra(SHARED_PREF_NAME, carJson);
+        startActivity(newintent);
     }
 }
