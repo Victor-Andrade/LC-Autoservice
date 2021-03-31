@@ -50,29 +50,29 @@ public class CarInfoActivity extends AppCompatActivity {
         //This is the 1st spinner
         tradeMarkSpinner = findViewById(R.id.tradeMarkSpinner);
         ArrayAdapter<String> arrayAdapter_parent = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, trademarkList);
-        arrayAdapter_parent.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                R.layout.selected_item, trademarkList);
+        arrayAdapter_parent.setDropDownViewResource(R.layout.dropdown_item);
         tradeMarkSpinner.setAdapter(arrayAdapter_parent);
 
         //This is the 2nd spinner
         modelSpinner = findViewById(R.id.modelSpinner);
         ArrayAdapter<String> modelAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, modelList);
-        modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                R.layout.selected_item, modelList);
+        modelAdapter.setDropDownViewResource(R.layout.dropdown_item);
         modelSpinner.setAdapter(modelAdapter);
 
         //This is the 3rd spinner
         yearSpinner = findViewById(R.id.yearSpinner);
         ArrayAdapter<String> yearsAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, yearsList);
-        yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                R.layout.selected_item, yearsList);
+        yearsAdapter.setDropDownViewResource(R.layout.dropdown_item);
         yearSpinner.setAdapter(yearsAdapter);
 
         //This is the 4th spinner
         kilometersSpinner = findViewById(R.id.kilometersSpinner);
         ArrayAdapter<String> kilometersAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, kilometersList);
-        kilometersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                R.layout.selected_item, kilometersList);
+        kilometersAdapter.setDropDownViewResource(R.layout.dropdown_item);
         kilometersSpinner.setAdapter(kilometersAdapter);
 
         tradeMarkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

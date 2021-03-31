@@ -15,4 +15,8 @@
     <string name="instagram_logo">instagram_logo</string>
     <string name="esta_aplicacion_es_para_obtener_una_lista_de_procedimientos_mecanicos_que_necesita_mi_automovil_de_acuerdo_con_la_marca_modelo_a_o_y_kilometraje">Esta aplicacion es para obtener una lista de procedimientos mecanicos que necesita mi automovil de acuerdo con la marca, modelo, año y kilometraje.</string>
     <string name="loading">Loading</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="a_o">Año</string>
+    <string name="kilometros">Kilometros</string>
 </resources>
