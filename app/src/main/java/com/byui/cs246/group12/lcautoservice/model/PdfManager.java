@@ -34,7 +34,7 @@ import java.util.List;
 
 public class PdfManager {
     private static final String TAG = "PdfManager";
-    private final String stringfile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/Test.pdf";
+    private final String stringfile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/LC_AutoService_Quote.pdf";
     Bitmap bmp, scaledBmp;
     int pageWidth = 1240;
     int pageHeight = 1754;
@@ -77,15 +77,20 @@ public class PdfManager {
         canvas.drawText("Resumen de Procedimientos", pageWidth / 2, 300, titlePaint);
 
         myPaint.setTextSize(20);
+        myPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         dateFormat = new SimpleDateFormat("dd/MM/yy");
-        canvas.drawText("Fecha: " + dateFormat.format(dateObj), pageWidth - 150, 100, myPaint);
+        canvas.drawText("Fecha: " + dateFormat.format(dateObj), pageWidth - 200, 100, myPaint);
         dateFormat = new SimpleDateFormat("HH:mm:ss");
-        canvas.drawText("Hora: " + dateFormat.format(dateObj), pageWidth - 150, 150, myPaint);
+        canvas.drawText("Hora: " + dateFormat.format(dateObj), pageWidth - 200, 150, myPaint);
         canvas.drawText("Marca: " + car.getBrand(), 20, 400, myPaint);
         canvas.drawText("Modelo: " + car.getModel(), 20, 450, myPaint);
-        canvas.drawText("Año: " + car.getYear(), 20, 500, myPaint);
-        canvas.drawText("Kilometros: " + car.getKilometers() + " km", 20, 550, myPaint);
+        canvas.drawText("Año: " + car.getYear(), 300, 400, myPaint);
+        canvas.drawText("Kilometros: " + car.getKilometers() + " km", 300, 450, myPaint);
+
+        myPaint.setTextSize(16);
+        myPaint.setTypeface(Typeface.DEFAULT);
+
         int height = 600;
         if(procedures.size()> 0){
             for (String procedure : procedures) {
@@ -97,7 +102,7 @@ public class PdfManager {
                     height = 50;
                 }
                 canvas.drawText(procedure, 20,height , myPaint);
-                height +=50;
+                height +=30;
             }
         }
         myPdf.finishPage(myPage);
