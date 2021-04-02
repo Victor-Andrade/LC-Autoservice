@@ -10,19 +10,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import com.byui.cs246.group12.lcautoservice.model.Car;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.google.gson.Gson;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 public class CarInfoActivity extends AppCompatActivity {
     private static final String TAG = "CarInfoActivity";
     public static final String SHARED_PREF_NAME = "autoInfo";
-    Spinner tradeMarkSpinner, modelSpinner, yearSpinner, kilometersSpinner;
+    private Spinner tradeMarkSpinner, modelSpinner, yearSpinner, kilometersSpinner;
+    private String trademark, model, year, kilometers;
     private ExcelManager manager;
-    Gson gson;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,95 +34,71 @@ public class CarInfoActivity extends AppCompatActivity {
         startSpinners();
     }
 
-    private void startSpinners() {
-        //Test list
-        //This list will come from the Excel class
-
+    private void startSpinners(){
         List<String> trademarkList = manager.getBrands();
-
-        List<String> modelList = new ArrayList<>();
-
-        ArrayList<String> yearsList = new ArrayList<>();
-
-        ArrayList<String> kilometersList = new ArrayList<>();
-
-
-        //This is the 1st spinner
         tradeMarkSpinner = findViewById(R.id.tradeMarkSpinner);
-        ArrayAdapter<String> arrayAdapter_parent = new ArrayAdapter<>(this,
-                R.layout.selected_item, trademarkList);
-        arrayAdapter_parent.setDropDownViewResource(R.layout.dropdown_item);
-        tradeMarkSpinner.setAdapter(arrayAdapter_parent);
-
-        //This is the 2nd spinner
         modelSpinner = findViewById(R.id.modelSpinner);
-        ArrayAdapter<String> modelAdapter = new ArrayAdapter<>(this,
-                R.layout.selected_item, modelList);
-        modelAdapter.setDropDownViewResource(R.layout.dropdown_item);
-        modelSpinner.setAdapter(modelAdapter);
-
-        //This is the 3rd spinner
         yearSpinner = findViewById(R.id.yearSpinner);
-        ArrayAdapter<String> yearsAdapter = new ArrayAdapter<>(this,
-                R.layout.selected_item, yearsList);
-        yearsAdapter.setDropDownViewResource(R.layout.dropdown_item);
-        yearSpinner.setAdapter(yearsAdapter);
-
-        //This is the 4th spinner
         kilometersSpinner = findViewById(R.id.kilometersSpinner);
-        ArrayAdapter<String> kilometersAdapter = new ArrayAdapter<>(this,
-                R.layout.selected_item, kilometersList);
-        kilometersAdapter.setDropDownViewResource(R.layout.dropdown_item);
-        kilometersSpinner.setAdapter(kilometersAdapter);
 
-        tradeMarkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //Start first Spinner
+        //Each spinner will update the next one data
+        spinnerAdapterFactory(tradeMarkSpinner, trademarkList, trademarkListener());
+    }
+
+    private AdapterView.OnItemSelectedListener trademarkListener(){
+        return listenerGenerator(()->{
+                    trademark = tradeMarkSpinner.getSelectedItem().toString();
+                    List<String> newModels = manager.getModels(trademark);
+                    resetSpinners(yearSpinner, kilometersSpinner, modelSpinner);
+                    spinnerAdapterFactory(modelSpinner, newModels, modelListener());
+                    Log.i(TAG, "new models " + newModels);
+                    return null;
+        });
+    }
+
+    private AdapterView.OnItemSelectedListener modelListener(){
+        return listenerGenerator(()->{
+            model = modelSpinner.getSelectedItem().toString();
+            List<String> newYears = manager.getYears(trademark, model);
+            resetSpinners(yearSpinner, kilometersSpinner);
+            Log.i(TAG, "new years:  " + newYears);
+            spinnerAdapterFactory(yearSpinner, newYears, yearListener());
+            return null;
+        });
+    }
+
+    private AdapterView.OnItemSelectedListener yearListener(){
+        return listenerGenerator(()->{
+            year = yearSpinner.getSelectedItem().toString();
+            List<String> newKilometers = manager.getKilometers(trademark, model, year);
+            resetSpinners(kilometersSpinner);
+            Log.i(TAG, "new kilometers:  " + newKilometers);
+            spinnerAdapterFactory(kilometersSpinner, newKilometers, listenerGenerator(()->{
+                        kilometers = kilometersSpinner.getSelectedItem().toString();
+                        Log.i(TAG, "kilometers Spinner selected " + kilometers);
+                        return null;
+                    })
+            );
+            return null;
+        });
+    }
+
+    private AdapterView.OnItemSelectedListener listenerGenerator(Callable<Void> itemSelected){
+        return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //When select something, we want to search on the database to check the list of the
-                // models from this brand.
-                //Then we want to update the content for the next spinner
-                String item = parent.getItemAtPosition(position).toString();
-                modelList.clear();
-                modelList.addAll(manager.getModels(item));
-                modelAdapter.notifyDataSetChanged();
-                Log.i(TAG, "Brand Spinner selected " + item);
+                try {
+                    itemSelected.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
-        });
-        modelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                yearsList.clear();
-                yearsList.addAll(manager.getYears(tradeMarkSpinner.getSelectedItem().toString(), item));
-                yearsAdapter.notifyDataSetChanged();
-                Log.i(TAG, "Model Spinner selected " + item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                kilometersList.clear();
-                List<String> receivedKilometers = manager.getKilometers(tradeMarkSpinner.getSelectedItem().toString(), modelSpinner.getSelectedItem().toString(), item);
-                kilometersList.addAll(receivedKilometers);
-                kilometersAdapter.notifyDataSetChanged();
-                Log.i(TAG, "Kilometers Spinner selected " + item);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        };
     }
 
     @Override
@@ -136,12 +112,8 @@ public class CarInfoActivity extends AppCompatActivity {
     }
 
     public void navToProc(View view) {
-        String brand = tradeMarkSpinner.getSelectedItem().toString();
-        String model = modelSpinner.getSelectedItem().toString();
-        int year = Integer.parseInt(yearSpinner.getSelectedItem().toString());
-        int kilometers = Integer.parseInt(kilometersSpinner.getSelectedItem().toString());
         Intent newintent = new Intent(this, QuoteActivity.class);
-        Car car = new Car(brand, model, year, kilometers);
+        Car car = new Car(trademark, model, Integer.parseInt(year), Integer.parseInt(kilometers));
         String managerJson = gson.toJson(manager);
         String carJson = gson.toJson(car);
         Log.i(TAG, carJson);
@@ -149,4 +121,28 @@ public class CarInfoActivity extends AppCompatActivity {
         newintent.putExtra(SHARED_PREF_NAME, carJson);
         startActivity(newintent);
     }
+
+    //Creating spinner adapter factory
+    /*
+    IT should load the spinner according to received data.
+    it will receive a list and a spinner. it will populate the spinner with the received data.
+     */
+    private void spinnerAdapterFactory(Spinner spinner, List<String> data, AdapterView.OnItemSelectedListener listener){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.selected_item, data);
+        adapter.setDropDownViewResource(R.layout.dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(listener);
+    }
+
+    /*
+    Spinner reseter
+    it will reset and delete the data from one spinner
+     */
+    private void resetSpinners(Spinner... spinners){
+        for (Spinner spinner : spinners) {
+            spinner.setAdapter(null);
+        }
+    }
+
 }
