@@ -28,8 +28,10 @@ import java.util.List;
 
 /**
  * This class handles all the PDF related functions.
- * Create PDF
- * Send PDF through WhatsApp
+ * <ul>
+ *     <li>Generates PDF with Car information and procedures</li>
+ *     <li>Send PDF through WhatsApp to specific contact</li>
+ * </ul>
  */
 
 public class PdfManager {
@@ -74,7 +76,7 @@ public class PdfManager {
         titlePaint.setTextAlign(Paint.Align.CENTER);
         titlePaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         titlePaint.setTextSize(40);
-        canvas.drawText("Resumen de Procedimientos", pageWidth / 2, 300, titlePaint);
+        canvas.drawText("Resumen de Procedimientos", pageWidth/2, 300, titlePaint);
 
         myPaint.setTextSize(20);
         myPaint.setTypeface(Typeface.DEFAULT_BOLD);

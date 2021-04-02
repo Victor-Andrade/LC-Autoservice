@@ -66,15 +66,15 @@ public class ExcelManager implements Serializable {
         InputStream f = manager.open(filePath);
         InputStreamReader reader = new InputStreamReader(f);
         BufferedReader bufferedReader = new BufferedReader(reader);
-        List<String[]> lista = new ArrayList<>();
+        List<String[]> list = new ArrayList<>();
         while (reader.ready()) {
             line = bufferedReader.readLine();
             data = line.split(",");
             Log.d(TAG, Arrays.toString(data));
-            lista.add(data);
+            list.add(data);
         }
         bufferedReader.close();
-        return lista;
+        return list;
     }
 
     private static List<String> listCsv(Context context) throws IOException {
@@ -90,11 +90,17 @@ public class ExcelManager implements Serializable {
         return csvFiles;
     }
 
+    /**
+     *
+     * @param context of the assets.
+     * @return Returns a collection of HashMaps to store the car information.
+     * @throws IOException to add labels to the different dropdown options.
+     */
     public static ExcelManager startManager(Context context) throws IOException {
         List<String> files = listCsv(context);
         AssetManager assetManager = context.getAssets();
         /*
-         A collection of nested HashMaps to store the car info, fallowing this pattern(starting by the external value)
+         A collection of nested HashMaps to store the car info, following this pattern(starting by the external value)
          Store the hashmaps according to:
          1. Brand
          2. Model

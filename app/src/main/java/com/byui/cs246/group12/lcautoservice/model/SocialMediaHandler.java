@@ -10,9 +10,11 @@ import java.util.List;
 
 /**
  * This class handles all the links for the sponsor's social media sites:
- * Main website
- * Facebook
- * Instagram
+ * <ul>
+ *     <li>Main website</li>
+ *     <li>Facebook</li>
+ *     <li>Instagram</li>
+ * </ul>
  */
 
 public class SocialMediaHandler {
@@ -56,9 +58,7 @@ public class SocialMediaHandler {
 		final Intent intent = new Intent(Intent.ACTION_VIEW);
 		try {
 			if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
-				if (url.endsWith("/")) {
-					url = url.substring(0, url.length() - 1);
-				}
+				url = url.substring(0, url.length() - 1);
 				final String username = url.substring(url.lastIndexOf("/") + 1);
 
 				intent.setData(Uri.parse("http://instagram.com/_u/" + username));
