@@ -1,12 +1,15 @@
 package com.byui.cs246.group12.lcautoservice;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -14,11 +17,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         FilesLoader filesLoader = new FilesLoader();
         filesLoader.execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FilesLoader extends AsyncTask<Void, Void, ExcelManager> {
         private ExcelManager manager = null;
         @Override

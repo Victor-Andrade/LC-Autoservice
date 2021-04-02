@@ -1,33 +1,21 @@
 package com.byui.cs246.group12.lcautoservice;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import com.byui.cs246.group12.lcautoservice.model.Car;
-import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.PdfManager;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class QuoteActivity extends AppCompatActivity {
-    private static final String TAG = "QuoteActivity";
     private Car car;
     ArrayList<String> procedures;
 

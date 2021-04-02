@@ -3,15 +3,12 @@ package com.byui.cs246.group12.lcautoservice;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.byui.cs246.group12.lcautoservice.model.SocialMediaHandler;
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 /**
  * This class shows the first screen with the sponsor's main social media links and
@@ -21,7 +18,6 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     ExcelManager manager;
-    Button goToCarInfo;
 
     /**
      * Customer can visit the sponsor's main sites or click to enter car information button.
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         manager = gson.fromJson(getIntent().getStringExtra("ExcelManager"), ExcelManager.class);
         if(manager == null){
-            Log.w(TAG, "Manager is null");
+            Log.e(TAG, "Manager is null");
         }else{
             Log.d(TAG, "Manager received");
         }
