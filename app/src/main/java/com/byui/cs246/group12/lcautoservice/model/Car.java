@@ -86,4 +86,14 @@ public class Car {
     public void setKilometers(int kilometers) {
         this.kilometers = kilometers;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", kilometers=" + kilometers +
+                '}';
+    }
 }

@@ -59,15 +59,17 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="351dp"
-        android:layout_height="361dp"
+        android:layout_height="0dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/textview"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/carInfoLayout" />
 
     <Button
         android:id="@+id/getQuote"
@@ -88,19 +90,58 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:onClick="pdfPermissions"
-        android:text="Save PDF"
+        android:text="@string/save_pdf"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView6"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/carInfoLayout"
         android:layout_width="412dp"
         android:layout_height="73dp"
         android:layout_marginTop="16dp"
         android:background="#3F51B5"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageLogo">
+
+        <TextView
+            android:id="@+id/modelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/kilometersTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/trademarkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/yearTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

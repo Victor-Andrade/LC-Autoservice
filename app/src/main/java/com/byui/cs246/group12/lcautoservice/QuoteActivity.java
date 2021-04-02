@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.byui.cs246.group12.lcautoservice.model.Car;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 
 public class QuoteActivity extends AppCompatActivity {
     private Car car;
+    private static final String TAG= "QuoteActivity";
     ArrayList<String> procedures;
 
     /**
@@ -33,7 +37,27 @@ public class QuoteActivity extends AppCompatActivity {
         car = gson.fromJson(receivedIntent.getStringExtra(CarInfoActivity.SHARED_PREF_NAME), Car.class);
         procedures = receivedIntent.getStringArrayListExtra("Procedures");
 
+        if(car != null){
+            Log.d(TAG, car.toString());
+            showCarInfo();
+        }else{
+            Toast.makeText(this, "Error loading the car", Toast.LENGTH_SHORT).show();
+        }
+
         showProcedures();
+    }
+
+    private void showCarInfo() {
+        TextView carBrand = findViewById(R.id.trademarkTextView);
+        TextView carModel = findViewById(R.id.modelTextView);
+        TextView carYear = findViewById(R.id.yearTextView);
+        TextView carKm = findViewById(R.id.kilometersTextView);
+        carBrand.setText(car.getBrand());
+        carModel.setText(car.getModel());
+        String year = String.valueOf(car.getYear());
+        String km = String.valueOf(car.getKilometers());
+        carYear.setText(year);
+        carKm.setText(km);
     }
 
     private void showProcedures() {

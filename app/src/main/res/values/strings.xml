@@ -19,4 +19,5 @@
     <string name="modelo">Modelo</string>
     <string name="a_o">Año</string>
     <string name="kilometros">Kilometros</string>
+    <string name="save_pdf">Save PDF</string>
 </resources>
