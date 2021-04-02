@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import com.byui.cs246.group12.lcautoservice.model.Car;
 import com.byui.cs246.group12.lcautoservice.model.ExcelManager;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -112,14 +114,14 @@ public class CarInfoActivity extends AppCompatActivity {
     }
 
     public void navToProc(View view) {
-        Intent newintent = new Intent(this, QuoteActivity.class);
+        Intent newIntent = new Intent(this, QuoteActivity.class);
         Car car = new Car(trademark, model, Integer.parseInt(year), Integer.parseInt(kilometers));
-        String managerJson = gson.toJson(manager);
+        List<String> procedures = manager.getProcedures(car);
         String carJson = gson.toJson(car);
         Log.i(TAG, carJson);
-        newintent.putExtra("ExcelManager", managerJson);
-        newintent.putExtra(SHARED_PREF_NAME, carJson);
-        startActivity(newintent);
+        newIntent.putStringArrayListExtra("Procedures", (ArrayList<String>) procedures);
+        newIntent.putExtra(SHARED_PREF_NAME, carJson);
+        startActivity(newIntent);
     }
 
     //Creating spinner adapter factory

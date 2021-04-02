@@ -29,9 +29,7 @@ import java.util.Set;
 public class QuoteActivity extends AppCompatActivity {
     private static final String TAG = "QuoteActivity";
     private Car car;
-    private Gson gson;
-    private ExcelManager manager;
-    List<String> excel;
+    ArrayList<String> procedures;
 
     /**
      * This method will display the procedures based on the car selection made by the end user.
@@ -43,27 +41,18 @@ public class QuoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote);
         Intent receivedIntent = getIntent();
-        gson = new Gson();
+        Gson gson = new Gson();
         car = gson.fromJson(receivedIntent.getStringExtra(CarInfoActivity.SHARED_PREF_NAME), Car.class);
-        manager = gson.fromJson(receivedIntent.getStringExtra("ExcelManager"), ExcelManager.class);
+        procedures = receivedIntent.getStringArrayListExtra("Procedures");
 
-        manageExcel();
+        showProcedures();
     }
 
-    private void manageExcel() {
-         excel = new ArrayList<>();
-        try {
-            Log.d(TAG, car.toString());
-            Log.d(TAG, manager.toString());
-            excel = manager.getProcedures(car);
-        } catch (Exception e) {
-            Log.e(TAG, "Catch main", e);
-        }
-        if(!excel.isEmpty()){
-            ListView excelList = findViewById(R.id.list);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, excel);
-            Toast.makeText(this, excel.get(2), Toast.LENGTH_SHORT).show();
-            excelList.setAdapter(adapter);
+    private void showProcedures() {
+        if(!procedures.isEmpty()){
+            ListView proceduresList = findViewById(R.id.list);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, procedures);
+            proceduresList.setAdapter(adapter);
         }
     }
 
@@ -76,8 +65,7 @@ public class QuoteActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         PdfManager manager = new PdfManager();
-        //manager.buttonShareFile(this);
-        manager.generatePdf(car,excel, this);
+        manager.generatePdf(car,procedures, this);
     }
 
     public void shareFile(View view) {
