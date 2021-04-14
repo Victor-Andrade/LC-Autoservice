@@ -56,7 +56,7 @@ public class PdfManager {
         sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.ContactPicker"));
         sendIntent.setType("application/pdf");
         sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
-        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators("50684863046") + "@s.whatsapp.net");
+        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators("50764436680") + "@s.whatsapp.net");
         context.startActivity(sendIntent);
     }
 
